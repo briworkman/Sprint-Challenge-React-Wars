@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import CharacterCard from "./components/CharacterCard";
+import { Button, FormGroup, Label, Input } from "reactstrap";
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -14,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("https://swapi.co/api/people/")
+      .get(`https://swapi.co/api/people/`)
       .then(response => {
         console.log(response.data.results);
         setCharacters(response.data.results);
@@ -27,6 +28,16 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
+      <FormGroup>
+        <Label for="exampleSearch"></Label>
+        <Input
+          type="text"
+          name="search"
+          className="search-bar"
+          placeholder="Search"
+        />
+        <Button color="warning">Search</Button>{" "}
+      </FormGroup>
       <div>
         {characters.map((character, index) => {
           return (
